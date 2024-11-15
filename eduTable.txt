@@ -1,0 +1,355 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1:3307
+-- 產生時間： 2024 年 11 月 10 日 13:02
+-- 伺服器版本： 10.6.18-MariaDB-0ubuntu0.22.04.1
+-- PHP 版本： 8.2.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 資料庫： `swim_wpmudev_host`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_admin_log`
+--
+
+CREATE TABLE `wp_3x_edu_admin_log` (
+  `id` int(11) NOT NULL,
+  `admin_user_id` int(11) NOT NULL,
+  `created` int(11) NOT NULL,
+  `edu_result_id` int(11) NOT NULL,
+  `handle` char(100) NOT NULL,
+  `before` text NOT NULL,
+  `after` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_attendance`
+--
+
+CREATE TABLE `wp_3x_edu_attendance` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `month` char(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` char(12) NOT NULL,
+  `attendance` char(255) NOT NULL,
+  `class_year` char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_bmi`
+--
+
+CREATE TABLE `wp_3x_edu_bmi` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `height` float(10,2) NOT NULL,
+  `weight` float(10,2) NOT NULL,
+  `hc` float(10,2) DEFAULT NULL,
+  `bmi` float(10,2) NOT NULL,
+  `date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_class`
+--
+
+CREATE TABLE `wp_3x_edu_class` (
+  `class_id` int(11) NOT NULL,
+  `class_name` text NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` char(255) NOT NULL,
+  `date_time` char(255) NOT NULL DEFAULT '',
+  `date_month` char(255) NOT NULL DEFAULT '',
+  `class_date` text NOT NULL,
+  `class_exam` text NOT NULL,
+  `lv3` char(255) NOT NULL DEFAULT '',
+  `class_year` char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_class_user`
+--
+
+CREATE TABLE `wp_3x_edu_class_user` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `month` char(255) NOT NULL,
+  `student` text DEFAULT NULL,
+  `student_transfer` text DEFAULT NULL,
+  `student_order` text DEFAULT NULL,
+  `order_id` text DEFAULT NULL,
+  `teacher` text DEFAULT NULL,
+  `days` text DEFAULT NULL,
+  `class_year` char(32) DEFAULT NULL,
+  `class_exam` text DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `history_students_status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_class_user_days`
+--
+
+CREATE TABLE `wp_3x_edu_class_user_days` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `month` char(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `days` text DEFAULT NULL,
+  `class_year` char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_level`
+--
+
+CREATE TABLE `wp_3x_edu_level` (
+  `id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `name` char(255) NOT NULL DEFAULT '',
+  `data` text NOT NULL,
+  `file_level` char(255) DEFAULT NULL,
+  `link` char(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_order`
+--
+
+CREATE TABLE `wp_3x_edu_order` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `month` char(255) DEFAULT NULL,
+  `class_year` char(16) DEFAULT NULL,
+  `amount` float(10,2) DEFAULT 0.00,
+  `last_days` char(255) DEFAULT '',
+  `gateway` char(255) DEFAULT '',
+  `avgfee` char(255) DEFAULT '',
+  `order_date` int(11) DEFAULT 0,
+  `created` int(11) DEFAULT NULL,
+  `refund_fee` float(10,2) DEFAULT 0.00,
+  `refund_reason` char(255) DEFAULT '',
+  `refund_date` char(255) DEFAULT '',
+  `user_id` int(11) DEFAULT NULL,
+  `type` char(10) DEFAULT '',
+  `woo_status` char(100) DEFAULT '',
+  `woo_class_name` char(255) DEFAULT '',
+  `woo_order_id` bigint(11) DEFAULT NULL,
+  `order_source` char(20) DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_order_status`
+--
+
+CREATE TABLE `wp_3x_edu_order_status` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_result`
+--
+
+CREATE TABLE `wp_3x_edu_result` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `class_month` char(255) NOT NULL DEFAULT '',
+  `exam_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `first_name` char(255) NOT NULL DEFAULT '',
+  `last_name` char(255) NOT NULL DEFAULT '',
+  `gender` char(255) NOT NULL DEFAULT '',
+  `birthdate` char(255) NOT NULL DEFAULT '',
+  `exam_type` char(255) NOT NULL DEFAULT '',
+  `exam_name` char(255) NOT NULL DEFAULT '',
+  `exam_data` char(255) NOT NULL DEFAULT '',
+  `exam_date` char(255) NOT NULL,
+  `exam_history` longtext NOT NULL,
+  `created` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `class_year` char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `wp_3x_edu_user`
+--
+
+CREATE TABLE `wp_3x_edu_user` (
+  `user_id` int(11) NOT NULL,
+  `note` text DEFAULT NULL,
+  `hourly_wage` float(10,2) DEFAULT NULL,
+  `class_fee` float(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `wp_3x_edu_admin_log`
+--
+ALTER TABLE `wp_3x_edu_admin_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_attendance`
+--
+ALTER TABLE `wp_3x_edu_attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_bmi`
+--
+ALTER TABLE `wp_3x_edu_bmi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_class`
+--
+ALTER TABLE `wp_3x_edu_class`
+  ADD PRIMARY KEY (`class_id`);
+
+--
+-- 資料表索引 `wp_3x_edu_class_user`
+--
+ALTER TABLE `wp_3x_edu_class_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_class_user_days`
+--
+ALTER TABLE `wp_3x_edu_class_user_days`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_level`
+--
+ALTER TABLE `wp_3x_edu_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_order`
+--
+ALTER TABLE `wp_3x_edu_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_order_status`
+--
+ALTER TABLE `wp_3x_edu_order_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `wp_3x_edu_result`
+--
+ALTER TABLE `wp_3x_edu_result`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_admin_log`
+--
+ALTER TABLE `wp_3x_edu_admin_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_attendance`
+--
+ALTER TABLE `wp_3x_edu_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_bmi`
+--
+ALTER TABLE `wp_3x_edu_bmi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_class`
+--
+ALTER TABLE `wp_3x_edu_class`
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_class_user`
+--
+ALTER TABLE `wp_3x_edu_class_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_class_user_days`
+--
+ALTER TABLE `wp_3x_edu_class_user_days`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_level`
+--
+ALTER TABLE `wp_3x_edu_level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_order`
+--
+ALTER TABLE `wp_3x_edu_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_order_status`
+--
+ALTER TABLE `wp_3x_edu_order_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `wp_3x_edu_result`
+--
+ALTER TABLE `wp_3x_edu_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
