@@ -72,7 +72,7 @@
 
 ---
 
-## **系統需求**
+## **現有server配置**
 - **PHP**: 8.2.25 (256M 記憶體限制)
 - **MySQL**: mysqlnd 8.2.25
 - **Composer**: 2.8.2
@@ -81,4 +81,4 @@
 ---
 
 ## **聯絡方式**
-如有疑問，請聯絡 **support@swim.hk** 或訪問 [swim.hk](https://swim.hk) 了解更多資訊。
+如有疑問，請聯絡 **info@swim.hk** 或訪問 [swim.hk](https://www.swim.hk) 了解更多資訊。
